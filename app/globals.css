@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* ===== ARCHIVE FONT ===== */
+
+@font-face {
+  font-family: 'Archive';
+  src: url('/fonts/Archive-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archive';
+  src: url('/fonts/Archive-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===== STREAMLY DESIGN TOKENS ===== */
 
 @theme {
@@ -44,21 +62,34 @@
   --radius-full: 9999px;
 
   /* Font Families */
-  --font-noto: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Archive — geometric display font for brand/logo */
+  --font-archive: 'Archive', 'Plus Jakarta Sans', sans-serif;
+  /* Legacy aliases — point to body font so old class references still work */
+  --font-noto: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-inter: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Accent Colors */
+  --color-accent-purple: #7C3AED;
+  --color-accent-purple-light: #A78BFA;
+
+  /* Section Spacing */
+  --space-section: 7rem;
 }
 
 /* ===== CSS CUSTOM PROPERTIES FOR THEMING ===== */
 
 :root {
-  --bg-primary: #F8F8F8;
-  --bg-secondary: #FAFAFA;
-  --bg-tertiary: #F5F5F5;
-  --border-color: #EFEFEF;
+  --bg-primary: #FAFAF8;
+  --bg-secondary: #F4F3EF;
+  --bg-tertiary: #ECEAE4;
+  --border-color: #E8E6E0;
   --text-primary: #11111F;
-  --text-secondary: #404040;
-  --text-tertiary: #737373;
-  --text-gray: #4A5568;
-  --border-gray: #E2E8F0;
+  --text-secondary: #3A3A3A;
+  --text-tertiary: #7A7A7A;
+  --text-gray: #5A5A6A;
+  --border-gray: #E0DED8;
 }
 
 .dark {
@@ -80,11 +111,13 @@ html {
 }
 
 body {
-  font-family: var(--font-noto);
+  font-family: var(--font-body);
   font-weight: 400;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===== BRUSH HIGHLIGHT ===== */
@@ -203,4 +236,175 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
+}
+
+/* Hide scrollbar for horizontal scroll sections */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== DISPLAY HEADINGS ===== */
+
+/* Serif display — Cormorant Garamond italic for premium impact moments */
+.display-serif {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+/* Bold sans display — Plus Jakarta Sans for strong headings */
+.display-heading {
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+/* Medium sans display — for section headings */
+.display-heading-lg {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+/* ===== SECTION DARK (gradient mesh for dark sections) ===== */
+
+.section-dark {
+  background:
+    radial-gradient(circle at 15% 60%, rgba(124, 58, 237, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(104, 210, 223, 0.2) 0%, transparent 45%),
+    linear-gradient(135deg, #11111F 0%, #1A1A2E 100%);
+}
+
+/* ===== SERVICE IMAGE OVERLAY ===== */
+
+.service-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.service-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.service-image-wrap:hover img {
+  transform: scale(1.04);
+}
+
+.service-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(17,17,31,0.5) 0%, rgba(104,210,223,0.1) 100%);
+  pointer-events: none;
+}
+
+/* ===== ARTICLE PROSE STYLES ===== */
+
+.article-body h2 {
+  font-family: var(--font-inter);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem;
+  line-height: 1.2;
+}
+
+.article-body h3 {
+  font-family: var(--font-inter);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 2rem 0 0.75rem;
+}
+
+.article-body p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem;
+}
+
+.article-body ul {
+  margin: 0 0 1.25rem 1.5rem;
+  list-style: disc;
+}
+
+.article-body ol {
+  margin: 0 0 1.25rem 1.5rem;
+  list-style: decimal;
+}
+
+.article-body li {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.article-body blockquote {
+  border-left: 3px solid #68D2DF;
+  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  background: rgba(104, 210, 223, 0.06);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.article-body blockquote p {
+  font-style: italic;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.article-body strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.article-body code {
+  font-size: 0.875rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-gray);
+  padding: 0.15em 0.45em;
+  border-radius: var(--radius-sm);
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+}
+
+.article-body pre {
+  background: #11111F;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.article-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #68D2DF;
+  font-size: 0.875rem;
+}
+
+.article-body a {
+  color: #68D2DF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body a:hover {
+  color: #4BBCC9;
 }

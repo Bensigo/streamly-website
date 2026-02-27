@@ -12,9 +12,9 @@ export default function SectionHeader({ title, subtitle, align = 'center', light
   return (
     <FadeIn className={`mb-12 lg:mb-16 ${align === 'center' ? 'text-center' : ''} ${action ? 'flex items-end justify-between' : ''}`}>
       <div>
-        <h2 className={`font-[family-name:var(--font-noto)] font-bold text-4xl lg:text-[56px] leading-tight ${
+        <h2 className={`display-heading-lg ${
           light ? 'text-white' : 'text-[var(--text-primary)]'
-        }`}>
+        }`} style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
           {title}
         </h2>
         {subtitle && (

@@ -1,183 +1,227 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ChevronDown, ChevronLeft, ChevronRight, Zap, Layers, Brain, ArrowRight } from 'lucide-react';
-import CharacterReveal from '@/components/animations/CharacterReveal';
-import FloatingShapes from '@/components/animations/FloatingShapes';
+import { ArrowRight, Check } from 'lucide-react';
 import FadeIn from '@/components/animations/FadeIn';
-import Button from '@/components/ui/Button';
-import SectionHeader from '@/components/ui/SectionHeader';
-import FilterChips from '@/components/ui/FilterChips';
-import { services, caseStudies, blogPosts, testimonials, processSteps } from '@/lib/data';
-
-const iconMap: Record<string, React.ElementType> = { Zap, Layers, Brain };
+import HomeHero from '@/components/sections/HomeHero';
+import HomeTestimonials from '@/components/sections/HomeTestimonials';
+import { blogPosts, processSteps } from '@/lib/data';
 
 export default function HomePage() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
-
-  const filteredStudies = activeFilter === 'All'
-    ? caseStudies
-    : caseStudies.filter(cs => cs.category === activeFilter);
-
-  const currentTestimonial = testimonials[testimonialIndex];
-
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center justify-center bg-[var(--bg-primary)] overflow-hidden">
-        <FloatingShapes />
-        <div className="relative z-10 text-center px-6 max-w-[800px]">
-          <h1 className="font-[family-name:var(--font-noto)] font-black text-[26px] md:text-[38px] lg:text-[62px] text-[var(--text-primary)] leading-[1.5] mb-6">
-            <CharacterReveal text="Streamline your growth with " delay={0} />
-            <motion.span
-              className="brush-highlight"
-              initial={{ color: 'var(--text-primary)' }}
-              animate={{ color: '#FFFFFF' }}
-              transition={{ delay: 1.32, duration: 0.4, ease: 'easeOut' }}
-            >
-              <motion.svg
-                viewBox="0 0 520 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                preserveAspectRatio="none"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 1.32, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{ originX: 0 }}
-              >
-                <path d="M8 45c2-18 20-30 45-34 30-6 70-8 110-7 50 1 100 3 150 6 40 3 85 5 120 10 25 4 55 10 65 22 8 10 2 22-12 28-20 8-50 12-80 13-55 2-110 0-165-2-50-2-100-4-150-3-35 1-70 3-80-6-4-4-5-10-4-16 1-5 3-9 6-11z" fill="url(#brush-grad)" />
-                <defs>
-                  <linearGradient id="brush-grad" x1="0" y1="45" x2="520" y2="45" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#00b4d8" />
-                    <stop offset="1" stopColor="#90e0ef" />
-                  </linearGradient>
-                </defs>
-              </motion.svg>
-              <CharacterReveal text="smart technology" delay={0.84} />
-            </motion.span>
-          </h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
-            className="text-[var(--text-secondary)] text-lg md:text-xl mb-12 tracking-wide"
-          >
-            Ad tech, AI, and software architecture for ambitious teams
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button href="/contact" size="lg">Book a Call</Button>
-            <Button href="/case-studies" variant="secondary" size="lg">See Our Work</Button>
-          </motion.div>
-        </div>
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ delay: 3 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cyan animate-bounce-gentle"
-        >
-          <ChevronDown size={24} />
-        </motion.div>
-      </section>
+      {/* ===== HERO (client component — animations) ===== */}
+      <HomeHero />
 
-      {/* ===== SOCIAL PROOF BAR ===== */}
-      <section className="bg-[rgba(255,255,255,0.02)] border-t border-cyan/20 py-8 overflow-hidden">
-        <p className="text-center text-xs uppercase tracking-widest text-[var(--text-gray)] mb-6">
-          Trusted by leading brands
-        </p>
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].map((_, setIdx) => (
-            <div key={setIdx} className="flex items-center gap-12 mx-6">
-              {['VaultPay', 'NexaMedia', 'ContentFlow', 'ShopWave', 'DataBridge', 'InsightPro', 'TechVenture', 'Axiom'].map(name => (
-                <span key={name} className="font-[family-name:var(--font-noto)] text-lg uppercase tracking-wider text-[var(--text-tertiary)] opacity-50 hover:opacity-100 transition-opacity cursor-default">
-                  {name}
-                </span>
-              ))}
+      {/* ===== SERVICES — Horizontal Scroll Cards ===== */}
+      <section className="py-32 bg-[var(--bg-primary)]">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="flex items-end justify-between mb-16 pb-7 border-b border-[var(--border-color)]">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-4">What We Do</p>
+              <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                Three Ways We Help
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== SERVICES BENTO GRID ===== */}
-      <section className="py-24 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <SectionHeader title="Our Services" subtitle="End-to-end solutions for modern growth" />
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {services.map((svc, i) => {
-              const Icon = iconMap[svc.icon];
-              return (
-                <FadeIn key={svc.id} delay={i * 0.1}>
-                  <div className="group block p-8 rounded-xl border border-[var(--border-gray)] bg-white hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(104,210,223,0.3)] hover:border-cyan/30 transition-all duration-300 h-full min-h-[240px]">
-                    {Icon && <Icon size={48} className="text-cyan mb-4" />}
-                    <h3 className="font-[family-name:var(--font-noto)] font-bold text-2xl text-[var(--text-primary)] mb-3">{svc.title}</h3>
-                    <p className="text-sm text-[var(--text-tertiary)] mb-4 leading-relaxed">{svc.description}</p>
-                  </div>
-                </FadeIn>
-              );
-            })}
+            <Link href="/services" className="hidden md:inline-flex items-center gap-2 text-sm font-medium text-[var(--text-tertiary)] hover:text-cyan transition-colors">
+              View All Services <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
-      </section>
 
-      {/* ===== CASE STUDIES ===== */}
-      <section className="py-24 px-6 bg-[var(--bg-primary)]">
-        <div className="max-w-[1200px] mx-auto">
-          <SectionHeader title="Featured Work" subtitle="Real results from real clients" />
-          <FilterChips
-            categories={['All', 'Ad Tech', 'Software', 'AI']}
-            active={activeFilter}
-            onChange={setActiveFilter}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredStudies.slice(0, 6).map((cs, i) => {
-              const bgColors = [
-                'bg-[#e0f7fa]',
-                'bg-[#b2ebf2]',
-                'bg-[#caf0f8]',
-                'bg-[#d4f1f9]',
-                'bg-[#b2f7ef]',
-                'bg-[#e0fcff]',
-              ];
-              return (
-                <FadeIn key={cs.id} delay={i * 0.08} className={i === 0 ? 'md:col-span-2' : ''}>
-                  <div className={`group relative overflow-hidden rounded-2xl cursor-pointer ${bgColors[i % bgColors.length]} p-8 h-full ${i === 0 ? 'min-h-[300px]' : 'min-h-[240px]'} flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}>
-                    <div>
-                      <p className="text-xs text-navy/60 font-medium mb-2">{cs.client} · {cs.category}</p>
-                      <h3 className="font-[family-name:var(--font-noto)] font-bold text-xl text-navy mb-3">{cs.title}</h3>
-                      <p className="text-sm text-navy/70 leading-relaxed line-clamp-2">{cs.description}</p>
-                    </div>
-                    <div className="mt-6">
-                      <span className="font-[family-name:var(--font-noto)] font-bold text-4xl text-navy">{cs.metric}</span>
-                      <span className="text-sm text-navy/60 ml-2">{cs.metricLabel}</span>
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex items-stretch gap-5 px-6 lg:px-[max(1.5rem,calc((100vw-1200px)/2+1.5rem))] pb-4" style={{ minWidth: 'min-content' }}>
+            {[
+              {
+                number: '01',
+                title: 'Strategic Monetization Advisory',
+                tagline: 'Build or professionalize your ad monetization infrastructure with expert strategic leadership.',
+                bullets: [
+                  'Monetization audit & gap analysis',
+                  'Ad stack architecture & implementation',
+                  'Demand partner evaluation & onboarding',
+                  'Ongoing strategic advisory & leadership',
+                ],
+                color: 'from-cyan/20 to-cyan/5',
+              },
+              {
+                number: '02',
+                title: 'AI-Augmented Ad Ops & Yield',
+                tagline: 'Fully managed, AI-powered yield optimization and ad operations — without building an internal team.',
+                bullets: [
+                  'Real-time yield optimization',
+                  'Campaign trafficking & QA',
+                  'Floor price & inventory management',
+                  'Performance reporting & insights',
+                ],
+                color: 'from-purple-500/20 to-purple-500/5',
+              },
+              {
+                number: '03',
+                title: 'Supply Partnerships & Market Entry',
+                tagline: 'Grow your publisher footprint in MEA with market intelligence and active partnership development.',
+                bullets: [
+                  'MEA market intelligence & mapping',
+                  'Publisher outreach & relationship building',
+                  'Partnership negotiation & onboarding',
+                  'Comprehensive market entry programs',
+                ],
+                color: 'from-amber-500/20 to-amber-500/5',
+              },
+            ].map((service, i) => (
+              <FadeIn key={service.number} delay={i * 0.1} className="flex flex-shrink-0">
+                <Link
+                  href="/services"
+                  className="group flex flex-col w-[340px] md:w-[380px] rounded-2xl border border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-cyan/40 transition-all duration-300 overflow-hidden"
+                >
+                  {/* Gradient header */}
+                  <div className={`bg-gradient-to-br ${service.color} px-8 pt-8 pb-6`}>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-cyan/70 mb-4 block">
+                      Service {service.number}
+                    </span>
+                    <h3 className="display-heading-lg text-[var(--text-primary)] text-lg mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-[var(--text-tertiary)] leading-relaxed font-light">
+                      {service.tagline}
+                    </p>
+                  </div>
+
+                  {/* Bullets + CTA */}
+                  <div className="px-8 pt-6 pb-8 flex flex-col flex-1">
+                    <ul className="space-y-3 flex-1">
+                      {service.bullets.map(bullet => (
+                        <li key={bullet} className="flex items-start gap-3">
+                          <div className="w-4 h-4 rounded-sm bg-cyan/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Check size={10} className="text-cyan" strokeWidth={2.5} />
+                          </div>
+                          <span className="text-sm text-[var(--text-secondary)] leading-snug">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-8 pt-5 border-t border-[var(--border-color)]">
+                      <span className="inline-flex items-center gap-2 text-sm font-medium text-cyan group-hover:gap-3 transition-all duration-200">
+                        Explore service <ArrowRight size={13} />
+                      </span>
                     </div>
                   </div>
-                </FadeIn>
-              );
-            })}
+                </Link>
+              </FadeIn>
+            ))}
           </div>
+        </div>
+
+        {/* Mobile: View All link */}
+        <div className="md:hidden px-6 mt-6">
+          <Link href="/services" className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-tertiary)] hover:text-cyan transition-colors">
+            View All Services <ArrowRight size={13} />
+          </Link>
         </div>
       </section>
 
-      {/* ===== PROCESS / HOW WE WORK ===== */}
-      <section className="py-24 px-6">
+      {/* ===== WHAT WE DO — premium dark section ===== */}
+      <section className="relative py-32 px-6 bg-[#0D0D1A] overflow-hidden">
+        {/* Ambient glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 80% 30%, rgba(104,210,223,0.05) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 10% 80%, rgba(124,58,237,0.04) 0%, transparent 60%)' }}
+        />
+
+        <div className="relative z-10 max-w-[1200px] mx-auto">
+          {/* Header */}
+          <FadeIn>
+            <div className="mb-20 pb-7 border-b border-white/8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan/70 mb-4">What We Do</p>
+              <h2 className="display-heading-lg text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                CTV Monetization, End to End
+              </h2>
+            </div>
+          </FadeIn>
+
+          {/* Hero image + intro text */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-24">
+            <FadeIn>
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80"
+                  alt="Team collaborating on CTV strategy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/60 to-transparent" />
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <div className="flex flex-col justify-center">
+                <p className="text-neutral-300 text-lg leading-relaxed mb-6 font-light">
+                  The streaming landscape in MEA is at an exciting inflection point. CTV publishers are launching and scaling ad-supported tiers. Audiences are growing. And the programmatic infrastructure that turns that audience into sustainable revenue is rapidly maturing across the region.
+                </p>
+                <p className="text-neutral-300 text-lg leading-relaxed mb-8 font-light">
+                  Streamly exists to help publishers and adtech vendors make the most of this moment.
+                </p>
+                <div className="w-12 h-[1.5px] bg-cyan/40 mb-8" />
+                <p className="text-neutral-400 text-base leading-relaxed font-light">
+                  We bring hands-on CTV monetization and adtech expertise to the businesses shaping streaming in MEA — combining strategic advisory, practical implementation, and AI-augmented managed services to help our clients build revenue operations that are built to last and built to grow.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Image mosaic row */}
+          <div className="grid grid-cols-3 gap-3 mb-24">
+            {[
+              { src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80', alt: 'Data analytics dashboard', label: 'Strategy', delay: 0 },
+              { src: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80', alt: 'AI-powered optimization', label: 'AI-Powered', delay: 0.1 },
+              { src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80', alt: 'Partnership and growth', label: 'Partnerships', delay: 0.2 },
+            ].map((img) => (
+              <FadeIn key={img.label} delay={img.delay}>
+                <div className="relative rounded-xl overflow-hidden aspect-[3/2]">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan/80">{img.label}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <FadeIn delay={0.1}>
+            <div className="text-center">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2.5 h-12 px-8 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y transition-colors"
+              >
+                Explore Our Services <ArrowRight size={14} />
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ===== PROCESS — light section ===== */}
+      <section className="py-32 px-6 bg-[var(--bg-primary)]">
         <div className="max-w-[1200px] mx-auto">
-          <SectionHeader title="How We Work" subtitle="A proven process for measurable results" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mb-16 pb-7 border-b border-[var(--border-color)]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-4">How It Works</p>
+            <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+              A proven four-step process
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, i) => (
-              <FadeIn key={step.number} delay={i * 0.15}>
-                <div className="relative">
-                  <span className="font-[family-name:var(--font-noto)] text-7xl text-navy/10">{step.number}</span>
-                  <h3 className="font-[family-name:var(--font-noto)] font-bold text-2xl text-navy mt-2 mb-3">{step.title}</h3>
-                  <p className="text-sm text-navy/70 leading-relaxed">{step.description}</p>
+              <FadeIn key={step.number} delay={i * 0.1}>
+                <div className={`relative py-10 pr-10 ${i < processSteps.length - 1 ? 'lg:border-r border-[var(--border-color)]' : ''} ${i > 0 ? 'lg:pl-10' : ''} border-b lg:border-b-0 border-[var(--border-color)] last:border-b-0`}>
+                  <span className="display-serif text-[var(--border-color)] select-none absolute top-6 right-6 leading-none" style={{ fontSize: '5rem' }}>
+                    {step.number}
+                  </span>
+                  <div className="relative z-10">
+                    <div className="w-7 h-[1.5px] bg-cyan mb-7" />
+                    <h3 className="display-heading-lg text-[var(--text-primary)] mb-3" style={{ fontSize: '1.05rem' }}>{step.title}</h3>
+                    <p className="text-sm text-[var(--text-tertiary)] leading-relaxed font-light">{step.description}</p>
+                  </div>
                 </div>
               </FadeIn>
             ))}
@@ -185,120 +229,101 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
-      <section className="py-24 px-6 bg-[var(--bg-primary)]">
-        <div className="max-w-[1000px] mx-auto">
-          <SectionHeader title="Loved by our clients" />
-          <FadeIn>
-            <div className="relative">
-              <div className="p-8 md:p-12 rounded-xl border border-[var(--border-gray)] bg-white min-h-[280px] flex flex-col justify-between">
-                <p className="text-lg text-[var(--text-secondary)] italic leading-relaxed mb-8">
-                  &ldquo;{currentTestimonial.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center text-cyan font-semibold text-sm">
-                    {currentTestimonial.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[var(--text-primary)]">{currentTestimonial.name}</p>
-                    <p className="text-sm text-[var(--text-tertiary)]">{currentTestimonial.role}, {currentTestimonial.company}</p>
-                  </div>
-                </div>
-              </div>
+      {/* ===== TESTIMONIALS (client component — interactive) ===== */}
+      <HomeTestimonials />
 
-              {/* Nav */}
-              <button
-                onClick={() => setTestimonialIndex(prev => prev === 0 ? testimonials.length - 1 : prev - 1)}
-                className="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-cyan flex items-center justify-center text-cyan hover:bg-cyan hover:text-white transition-colors cursor-pointer"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button
-                onClick={() => setTestimonialIndex(prev => prev === testimonials.length - 1 ? 0 : prev + 1)}
-                className="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-cyan flex items-center justify-center text-cyan hover:bg-cyan hover:text-white transition-colors cursor-pointer"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={20} />
-              </button>
-
-              {/* Dots */}
-              <div className="flex justify-center gap-2 mt-8">
-                {testimonials.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setTestimonialIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      i === testimonialIndex ? 'bg-cyan scale-125' : 'bg-[var(--text-tertiary)]'
-                    }`}
-                    aria-label={`Testimonial ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ===== BLOG PREVIEW ===== */}
-      <section className="py-24 px-6 bg-[var(--bg-primary)]">
+      {/* ===== BLOG — light section ===== */}
+      <section className="py-32 px-6 bg-[var(--bg-secondary)]">
         <div className="max-w-[1200px] mx-auto">
-          <SectionHeader
-            title="Latest Insights"
-            align="left"
-            action={
-              <Link href="/blog" className="text-sm font-semibold text-cyan hover:underline inline-flex items-center gap-1">
-                View All <ArrowRight size={14} />
-              </Link>
-            }
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex items-end justify-between mb-16 pb-7 border-b border-[var(--border-color)]">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-4">From the Blog</p>
+              <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+                Latest Insights
+              </h2>
+            </div>
+            <Link href="/blog" className="hidden md:inline-flex items-center gap-2 text-sm font-medium text-[var(--text-tertiary)] hover:text-cyan transition-colors">
+              View All <ArrowRight size={13} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {blogPosts.map((post, i) => {
-              const cardGradients = [
-                'bg-gradient-to-br from-[#00b4d8] via-[#0077b6] to-[#03045e]',
-                'bg-gradient-to-br from-[#90e0ef] via-[#00b4d8] to-[#0077b6]',
-                'bg-gradient-to-br from-[#48cae4] via-[#023e8a] to-[#03045e]',
-              ];
+              const categoryColorMap: Record<string, string> = {
+                'Monetization Strategy': 'bg-cyan/10 text-cyan',
+                'Ad Ops & Yield': 'bg-purple-500/10 text-purple-400',
+                'Market Entry': 'bg-amber-500/10 text-amber-400',
+              };
+              const categoryColor = categoryColorMap[post.category] || 'bg-cyan/10 text-cyan';
               return (
-              <FadeIn key={post.id} delay={i * 0.1}>
-                <article className="group border border-[var(--border-gray)] rounded-xl overflow-hidden hover:border-cyan hover:shadow-md transition-all duration-300">
-                  <div className={`aspect-video ${cardGradients[i % cardGradients.length]}`} />
-                  <div className="p-6">
-                    <span className="inline-block px-3 py-1 text-[10px] font-semibold uppercase bg-cyan/15 text-cyan rounded-[var(--radius-sm)] mb-3">
-                      {post.category}
-                    </span>
-                    <h3 className="font-[family-name:var(--font-noto)] font-bold text-xl text-[var(--text-primary)] mb-2 leading-tight group-hover:text-cyan transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-[var(--text-tertiary)] mb-4 line-clamp-2">{post.excerpt}</p>
-                    <div className="flex items-center gap-4 text-xs text-[var(--text-tertiary)]">
-                      <span>{post.readTime}</span>
-                      <span>·</span>
-                      <span>{post.author}</span>
+                <FadeIn key={post.id} delay={i * 0.1}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex flex-col border border-[var(--border-color)] rounded-xl overflow-hidden hover:border-cyan/40 hover:shadow-sm transition-all duration-300 bg-[var(--bg-primary)] h-full"
+                  >
+                    <div className="relative overflow-hidden flex-shrink-0 aspect-video">
+                      {post.imageUrl ? (
+                        <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600 ease-out" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-cyan/15 via-navy/30 to-navy" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     </div>
-                  </div>
-                </article>
-              </FadeIn>
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className={`inline-block px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-sm mb-4 w-fit ${categoryColor}`}>
+                        {post.category}
+                      </span>
+                      <h3
+                        className="display-heading-lg text-[var(--text-primary)] mb-3 group-hover:text-cyan transition-colors duration-200 flex-1"
+                        style={{ fontSize: '1.05rem' }}
+                      >
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-[var(--text-tertiary)] mb-4 line-clamp-2 leading-relaxed font-light">{post.excerpt}</p>
+                      <div className="flex items-center gap-3 text-xs text-[var(--text-tertiary)] mt-auto pt-4 border-t border-[var(--border-color)] font-medium">
+                        <span>{post.readTime}</span>
+                        <span className="text-[var(--border-color)]">·</span>
+                        <span>{post.author}</span>
+                      </div>
+                    </div>
+                  </Link>
+                </FadeIn>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
-      <section className="py-24 px-6  text-center">
+      {/* ===== CTA — dark section ===== */}
+      <section className="relative py-36 px-6 bg-[#0D0D1A] overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(104,210,223,0.06) 0%, transparent 70%)' }}
+        />
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-noto)] font-bold text-4xl lg:text-[56px] text-navy leading-tight mb-4">
-            Ready to streamline your growth?
-          </h2>
-          <p className="text-lg text-navy/70 mb-12">Let&apos;s chat about your next project</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-            <Button href="/contact" size="lg">Schedule a Call</Button>
-            <Button href="mailto:hello@streamly.io" variant="secondary" size="lg">Send an Email</Button>
+          <div className="relative z-10 max-w-[680px] mx-auto text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan/60 mb-8 flex items-center justify-center gap-4">
+              <span className="w-8 h-px bg-cyan/30" />
+              Let&apos;s Talk
+              <span className="w-8 h-px bg-cyan/30" />
+            </p>
+            <h2 className="display-serif text-white mb-7" style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)' }}>
+              Ready to unlock the revenue your inventory deserves?
+            </h2>
+            <p className="text-neutral-400 text-lg mb-12 leading-relaxed font-light max-w-[520px] mx-auto">
+              Whether you&apos;re a publisher building your CTV ad stack or a vendor looking to grow in MEA, we&apos;d love to hear about your goals.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 h-13 px-10 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.15em] rounded-sm hover:bg-cyan-a11y transition-colors"
+              style={{ height: '3.25rem' }}
+            >
+              Book a Free Call <ArrowRight size={15} />
+            </Link>
+            <p className="text-neutral-600 text-xs mt-9 tracking-[0.2em] uppercase font-light">
+              No commitment &middot; Response within 1 business day
+            </p>
           </div>
-          <a href="mailto:hello@streamly.io" className="text-navy hover:text-cyan transition-colors">
-            hello@streamly.io
-          </a>
         </FadeIn>
       </section>
     </>

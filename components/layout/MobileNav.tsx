@@ -3,13 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Layers, Briefcase, BookOpen, Mail, MoreHorizontal, X, Users, Shield, FileText, Linkedin, Github } from 'lucide-react';
+import { Home, Layers, BookOpen, Mail, MoreHorizontal, X, Linkedin, Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const tabs = [
   { label: 'Home', href: '/', icon: Home },
   { label: 'Services', href: '/services', icon: Layers },
-  { label: 'Work', href: '/case-studies', icon: Briefcase },
   { label: 'Blog', href: '/blog', icon: BookOpen },
   { label: 'Contact', href: '/contact', icon: Mail },
 ];

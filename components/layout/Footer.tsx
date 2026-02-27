@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Send, Linkedin, Github, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/lib/theme';
 
@@ -14,11 +15,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="font-[family-name:var(--font-noto)] text-xl uppercase tracking-wider text-cyan">
-              STREAMLY
+            <Link href="/" className="inline-block">
+              <Image src="/logo.png" alt="Streamly" width={200} height={120} className="h-14 w-auto" />
             </Link>
             <p className="text-[var(--text-tertiary)] text-sm mt-4 leading-relaxed">
-              Smart technology for ambitious teams
+              CTV monetization &amp; adtech expertise for the MEA streaming market
             </p>
           </div>
 
@@ -26,26 +27,26 @@ export default function Footer() {
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-4">Services</h3>
             <ul className="space-y-3">
-              <li><Link href="/services#adtech" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Ad Tech & Programmatic</Link></li>
-              <li><Link href="/services#software" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Software Development</Link></li>
-              <li><Link href="/services#ai" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">AI Integration</Link></li>
+              <li><Link href="/services#strategic-advisory" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Strategic Monetization Advisory</Link></li>
+              <li><Link href="/services#yield-engine" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">AI-Augmented Ad Ops &amp; Yield</Link></li>
+              <li><Link href="/services#supply-partnerships" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Supply Partnerships &amp; Market Entry</Link></li>
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-4">Resources</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-4">Company</h3>
             <ul className="space-y-3">
+              <li><Link href="/about" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">About</Link></li>
               <li><Link href="/blog" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Blog</Link></li>
-              <li><Link href="/about#team" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors">Our Team</Link></li>
             </ul>
           </div>
 
           {/* Contact & Newsletter */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-4">Contact</h3>
-            <a href="mailto:hello@streamly.io" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors block mb-4">
-              hello@streamly.io
+            <a href="mailto:hello@streamlydigital.com" className="text-[var(--text-tertiary)] text-sm hover:text-cyan transition-colors block mb-4">
+              hello@streamlydigital.com
             </a>
             <p className="text-[var(--text-tertiary)] text-xs mb-2">Get updates</p>
             <form className="flex" onSubmit={e => e.preventDefault()}>

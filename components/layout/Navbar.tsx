@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { navLinks } from '@/lib/data';
@@ -39,8 +40,8 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
     >
       <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="font-[family-name:var(--font-noto)] text-lg uppercase tracking-wider text-cyan">
-          STREAMLY
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="Streamly" width={200} height={120} className="h-14 w-auto" priority />
         </Link>
 
         {/* Nav Links */}
@@ -52,7 +53,11 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 className={`font-[family-name:var(--font-noto)] text-[13px] uppercase tracking-[0.05em] transition-colors duration-150 relative ${
-                  isActive ? 'text-cyan' : 'text-[var(--text-primary)] hover:text-cyan'
+                  isActive
+                    ? 'text-cyan'
+                    : scrolled
+                    ? 'text-[var(--text-primary)] hover:text-cyan'
+                    : 'text-white/90 hover:text-cyan'
                 }`}
               >
                 {link.label}
@@ -68,7 +73,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
         <div className="flex items-center gap-4">
           <button
             onClick={onOpenSearch}
-            className="p-2 text-[var(--text-primary)] hover:text-cyan transition-colors"
+            className={`p-2 transition-colors hover:text-cyan ${scrolled ? 'text-[var(--text-primary)]' : 'text-white/90'}`}
             title="Press Cmd+K"
             aria-label="Search"
           >
