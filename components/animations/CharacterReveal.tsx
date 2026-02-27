@@ -19,12 +19,13 @@ export default function CharacterReveal({ text, className = '', delay = 0, charD
       animate="visible"
       className={className}
       aria-label={text}
+      style={{ display: 'inline', lineHeight: 1.2 }}
     >
       {words.map((word, wi) => {
         const startIndex = charIndex;
         charIndex += word.length + 1;
         return (
-          <span key={wi} style={{ whiteSpace: 'nowrap', display: 'inline-block' }}>
+          <span key={wi} style={{ whiteSpace: 'nowrap', display: 'inline-block', marginRight: wi < words.length - 1 ? '0.27em' : undefined }}>
             {word.split('').map((char, ci) => (
               <motion.span
                 key={ci}
@@ -42,22 +43,6 @@ export default function CharacterReveal({ text, className = '', delay = 0, charD
                 {char}
               </motion.span>
             ))}
-            {wi < words.length - 1 && (
-              <motion.span
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1 },
-                }}
-                transition={{
-                  duration: 0.4,
-                  delay: delay + (startIndex + word.length) * charDelay,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="inline"
-              >
-                {' '}
-              </motion.span>
-            )}
           </span>
         );
       })}
