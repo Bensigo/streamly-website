@@ -10,7 +10,8 @@ interface CharacterRevealProps {
 }
 
 export default function CharacterReveal({ text, className = '', delay = 0, charDelay = 0.03 }: CharacterRevealProps) {
-  const characters = text.split('');
+  const words = text.split(' ');
+  let charIndex = 0;
 
   return (
     <motion.span
@@ -19,24 +20,47 @@ export default function CharacterReveal({ text, className = '', delay = 0, charD
       className={className}
       aria-label={text}
     >
-      {characters.map((char, i) => (
-        <motion.span
-          key={i}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          transition={{
-            duration: 0.4,
-            delay: delay + i * charDelay,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="inline-block"
-          style={{ whiteSpace: char === ' ' ? 'pre' : undefined }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
+      {words.map((word, wi) => {
+        const startIndex = charIndex;
+        charIndex += word.length + 1;
+        return (
+          <span key={wi} style={{ whiteSpace: 'nowrap', display: 'inline-block' }}>
+            {word.split('').map((char, ci) => (
+              <motion.span
+                key={ci}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: delay + (startIndex + ci) * charDelay,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="inline-block"
+              >
+                {char}
+              </motion.span>
+            ))}
+            {wi < words.length - 1 && (
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: delay + (startIndex + word.length) * charDelay,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="inline"
+              >
+                {' '}
+              </motion.span>
+            )}
+          </span>
+        );
+      })}
     </motion.span>
   );
 }
