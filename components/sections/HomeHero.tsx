@@ -31,7 +31,7 @@ export default function HomeHero() {
 
             <h1
               className="display-serif text-white mb-8"
-              style={{ fontSize: 'clamp(2.25rem, 4.5vw, 4rem)' }}
+              style={{ fontSize: 'clamp(1.75rem, 4.5vw, 4rem)' }}
             >
               <CharacterReveal text="We help CTV publishers " delay={0} />
               <br className="hidden lg:block" />
