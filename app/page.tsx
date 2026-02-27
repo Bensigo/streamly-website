@@ -164,27 +164,30 @@ export default function HomePage() {
             </FadeIn>
           </div>
 
-          {/* Image mosaic row */}
-          <div className="grid grid-cols-3 gap-3 mb-24">
-            {[
-              { src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80', alt: 'Data analytics dashboard', label: 'Strategy', delay: 0 },
-              { src: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80', alt: 'AI-powered optimization', label: 'AI-Powered', delay: 0.1 },
-              { src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80', alt: 'Partnership and growth', label: 'Partnerships', delay: 0.2 },
-            ].map((img) => (
-              <FadeIn key={img.label} delay={img.delay}>
-                <div className="relative rounded-xl overflow-hidden aspect-[3/2]">
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan/80">{img.label}</p>
+          {/* Image mosaic — horizontal scroll on mobile, 3-col grid on desktop */}
+          <div className="mb-24 -mx-6 md:mx-0">
+            <div className="flex gap-4 overflow-x-auto scrollbar-hide px-6 md:px-0 md:grid md:grid-cols-3 md:gap-4">
+              {[
+                { src: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80', alt: 'Data analytics dashboard', label: 'Strategy', desc: 'Monetization roadmaps built for your market', delay: 0 },
+                { src: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80', alt: 'AI-powered optimization', label: 'AI-Powered', desc: 'Yield optimization that never sleeps', delay: 0.1 },
+                { src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80', alt: 'Partnership and growth', label: 'Partnerships', desc: 'Connect with the right publishers and vendors', delay: 0.2 },
+              ].map((img) => (
+                <FadeIn key={img.label} delay={img.delay} className="flex-shrink-0 w-[280px] md:w-auto">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[3/2] group">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/80 via-[#0D0D1A]/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-cyan mb-2">{img.label}</p>
+                      <p className="text-sm text-white/70 font-light leading-snug">{img.desc}</p>
+                    </div>
                   </div>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
