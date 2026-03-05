@@ -73,24 +73,21 @@ const serviceLines = [
 
 /* ── Accent color helpers ───────────────────────────────────────────────── */
 
-const accentMap: Record<string, { tag: string; border: string; glow: string; packageBorder: string }> = {
+const accentMap: Record<string, { tag: string; border: string; packageBorder: string }> = {
   cyan: {
-    tag: 'bg-cyan/10 text-cyan',
+    tag: 'bg-cyan/10 text-[#0A0A0A]',
     border: 'border-cyan/30',
-    glow: 'rgba(104,210,223,0.06)',
-    packageBorder: 'hover:border-cyan/40',
+    packageBorder: 'hover:border-[#0A0A0A]',
   },
   purple: {
-    tag: 'bg-purple-500/10 text-purple-400',
+    tag: 'bg-purple-500/10 text-[#0A0A0A]',
     border: 'border-purple-500/30',
-    glow: 'rgba(124,58,237,0.06)',
-    packageBorder: 'hover:border-purple-500/40',
+    packageBorder: 'hover:border-[#0A0A0A]',
   },
   amber: {
-    tag: 'bg-amber-500/10 text-amber-400',
+    tag: 'bg-amber-500/10 text-[#0A0A0A]',
     border: 'border-amber-500/30',
-    glow: 'rgba(245,158,11,0.06)',
-    packageBorder: 'hover:border-amber-500/40',
+    packageBorder: 'hover:border-[#0A0A0A]',
   },
 };
 
@@ -106,39 +103,26 @@ function ServiceBlock({ service, index }: { service: typeof serviceLines[0]; ind
     <section
       ref={ref}
       id={service.id}
-      className="relative py-28 lg:py-36 px-6 border-b border-white/6"
+      className={`relative py-28 lg:py-36 px-6 ${index % 2 === 0 ? 'bg-[var(--bg-primary)]' : 'bg-[var(--bg-secondary)]'}`}
     >
-      {/* Subtle ambient glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 50% 40% at ${isReversed ? '20%' : '80%'} 50%, ${colors.glow} 0%, transparent 70%)`,
-        }}
-      />
-
       <div className="relative z-10 max-w-[1200px] mx-auto">
-        {/* Service label */}
+        {/* Section header — matches home page pattern */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-4"
+          className="mb-16 pb-7 border-b border-[var(--border-color)]"
         >
-          <span className={`inline-block text-[10px] font-semibold uppercase tracking-[0.2em] px-3 py-1 rounded-sm ${colors.tag}`}>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">
             Service {service.number} — {service.label}
-          </span>
+          </p>
+          <h2
+            className="display-heading-lg text-[var(--text-primary)]"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+          >
+            {service.headline}
+          </h2>
         </motion.div>
-
-        {/* Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="display-serif text-white mb-16"
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
-        >
-          {service.headline}
-        </motion.h2>
 
         {/* Image + Body text */}
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-20 ${isReversed ? 'lg:[direction:rtl]' : ''}`}>
@@ -155,7 +139,7 @@ function ServiceBlock({ service, index }: { service: typeof serviceLines[0]; ind
               alt={service.imageAlt}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
           </motion.div>
 
           {/* Text */}
@@ -165,11 +149,11 @@ function ServiceBlock({ service, index }: { service: typeof serviceLines[0]; ind
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             style={{ direction: 'ltr' }}
           >
-            <p className="text-neutral-300 text-lg leading-relaxed mb-6 font-light">
+            <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6 font-light">
               {service.intro}
             </p>
             {service.body.map((para, pi) => (
-              <p key={pi} className="text-neutral-400 text-base leading-relaxed mb-6 font-light">
+              <p key={pi} className="text-[var(--text-tertiary)] text-base leading-relaxed mb-6 font-light">
                 {para}
               </p>
             ))}
@@ -182,20 +166,20 @@ function ServiceBlock({ service, index }: { service: typeof serviceLines[0]; ind
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-neutral-500 mb-6">Our Packages</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-6">Our Packages</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {service.packages.map((pkg) => (
               <div
                 key={pkg.name}
-                className={`p-6 rounded-xl border border-white/8 bg-white/[0.02] ${colors.packageBorder} transition-all duration-300`}
+                className={`p-6 rounded-2xl border border-[#E5E5E5] bg-white ${colors.packageBorder} transition-all duration-300`}
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-5 h-5 rounded-sm bg-cyan/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Check size={12} className="text-cyan" strokeWidth={3} />
                   </div>
-                  <h4 className="text-white font-semibold text-[0.95rem]">{pkg.name}</h4>
+                  <h4 className="text-[#0A0A0A] font-semibold text-[0.95rem]">{pkg.name}</h4>
                 </div>
-                <p className="text-sm text-neutral-400 leading-relaxed font-light pl-8">{pkg.desc}</p>
+                <p className="text-sm text-[#737373] leading-relaxed font-light pl-8">{pkg.desc}</p>
               </div>
             ))}
           </div>
@@ -210,7 +194,7 @@ function ServiceBlock({ service, index }: { service: typeof serviceLines[0]; ind
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2.5 h-12 px-8 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y hover:gap-3.5 transition-all duration-200"
+            className="inline-flex items-center gap-2.5 h-12 px-8 bg-cyan text-[#0A0A0A] font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y hover:gap-3.5 transition-all duration-200"
           >
             {service.cta} <ArrowRight size={14} />
           </Link>
@@ -227,10 +211,10 @@ export default function ServicesPage() {
     <div className="bg-[var(--bg-primary)] min-h-screen">
 
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#0D0D1A]">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white">
         <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(104,210,223,0.06) 0%, transparent 70%)' }}
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: 'radial-gradient(circle, #0A0A0A 1px, transparent 1px)', backgroundSize: '24px 24px' }}
         />
         <div className="relative z-10 text-center px-6 max-w-[780px] mx-auto py-32">
           <motion.div
@@ -238,30 +222,30 @@ export default function ServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan/60 mb-6 flex items-center justify-center gap-4">
-              <span className="w-8 h-px bg-cyan/30" />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-6 flex items-center justify-center gap-4">
+              <span className="w-10 h-px bg-[#D4D4D4]" />
               Our Services
-              <span className="w-8 h-px bg-cyan/30" />
+              <span className="w-10 h-px bg-[#D4D4D4]" />
             </p>
             <h1
-              className="display-serif text-white mb-6"
+              className="display-serif text-[#0A0A0A] mb-6"
               style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)' }}
             >
               Three ways we help you grow
             </h1>
-            <p className="text-lg text-neutral-400 max-w-[580px] mx-auto mb-10 leading-relaxed font-light">
+            <p className="text-lg text-[#737373] max-w-[580px] mx-auto mb-10 leading-relaxed font-light">
               Whether you&apos;re a CTV publisher building your monetization infrastructure or an adtech vendor growing your regional footprint, Streamly has a service designed around your specific needs.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="h-12 px-8 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y transition-colors inline-flex items-center gap-2"
+                className="h-12 px-8 bg-cyan text-[#0A0A0A] font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y transition-colors inline-flex items-center gap-2"
               >
                 Book a Free Call <ArrowRight size={14} />
               </Link>
               <a
                 href="#strategic-advisory"
-                className="h-12 px-8 border border-white/15 text-white/80 font-medium text-sm uppercase tracking-[0.12em] rounded-sm hover:border-cyan/60 hover:text-white transition-all inline-flex items-center"
+                className="h-12 px-8 border border-[#D4D4D4] text-[#404040] font-medium text-sm uppercase tracking-[0.12em] rounded-sm hover:border-[#0A0A0A] hover:text-[#0A0A0A] transition-all inline-flex items-center"
               >
                 Explore Services
               </a>
@@ -270,44 +254,39 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Service Blocks — all on dark bg */}
-      <div className="bg-[#0D0D1A]">
-        {serviceLines.map((service, i) => (
-          <ServiceBlock key={service.id} service={service} index={i} />
-        ))}
-      </div>
+      {/* Service Blocks */}
+      {serviceLines.map((service, i) => (
+        <ServiceBlock key={service.id} service={service} index={i} />
+      ))}
 
-      {/* Bottom CTA */}
-      <section className="relative py-32 px-6 bg-[#0D0D1A] overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(104,210,223,0.06) 0%, transparent 70%)' }}
-        />
+      {/* Bottom CTA — floating dark rounded section (matches home page) */}
+      <section className="py-36 px-6 bg-[#0A0A0A] rounded-[2rem] mx-4 my-4">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-[680px] mx-auto text-center"
+          className="max-w-[680px] mx-auto text-center"
         >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan/60 mb-8 flex items-center justify-center gap-4">
-            <span className="w-8 h-px bg-cyan/30" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-8 flex items-center justify-center gap-4">
+            <span className="w-8 h-px bg-[#404040]" />
             Let&apos;s Talk
-            <span className="w-8 h-px bg-cyan/30" />
+            <span className="w-8 h-px bg-[#404040]" />
           </p>
           <h2 className="display-serif text-white mb-7" style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)' }}>
             Ready to unlock the revenue your inventory deserves?
           </h2>
-          <p className="text-neutral-400 text-lg mb-12 leading-relaxed font-light max-w-[520px] mx-auto">
+          <p className="text-[#8A8A8A] text-lg mb-12 leading-relaxed font-light max-w-[520px] mx-auto">
             Whether you&apos;re a publisher building your CTV ad stack or a vendor looking to grow in MEA, we&apos;d love to hear about your goals.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 h-12 px-10 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.15em] rounded-sm hover:bg-cyan-a11y transition-colors"
+            className="inline-flex items-center gap-3 h-13 px-10 bg-cyan text-[#0A0A0A] font-semibold text-sm uppercase tracking-[0.15em] rounded-sm hover:bg-cyan-a11y transition-colors"
+            style={{ height: '3.25rem' }}
           >
             Book a Free Call <ArrowRight size={15} />
           </Link>
-          <p className="text-neutral-600 text-xs mt-9 tracking-[0.2em] uppercase font-light">
+          <p className="text-[#404040] text-xs mt-9 tracking-[0.2em] uppercase font-light">
             No commitment &middot; Response within 1 business day
           </p>
         </motion.div>

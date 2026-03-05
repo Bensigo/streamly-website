@@ -16,15 +16,22 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[55vh] flex items-center justify-center bg-[#0D0D1A]">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 70% at 50% 60%, rgba(104,210,223,0.07) 0%, transparent 70%)' }} />
+      <section className="relative min-h-[55vh] flex items-center justify-center bg-white overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: 'radial-gradient(circle, #0A0A0A 1px, transparent 1px)', backgroundSize: '24px 24px' }}
+        />
         <div className="relative z-10 text-center px-6">
           <FadeIn>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan/60 mb-6">About Streamly</p>
-            <h1 className="display-serif text-white mb-5" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}>
-              Built for the streaming opportunity in MEA
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-6 flex items-center justify-center gap-4">
+              <span className="w-10 h-px bg-[#D4D4D4]" />
+              About Streamly
+              <span className="w-10 h-px bg-[#D4D4D4]" />
+            </p>
+            <h1 className="display-serif text-[#0A0A0A] mb-5" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}>
+              Built for the streaming<br />opportunity in MEA
             </h1>
-            <p className="text-base font-light tracking-wide text-neutral-400 max-w-[560px] mx-auto">
+            <p className="text-base font-light tracking-wide text-[#737373] max-w-[560px] mx-auto">
               Helping CTV publishers and adtech vendors unlock the full potential of ad monetization across the Middle East and North Africa.
             </p>
           </FadeIn>
@@ -36,7 +43,7 @@ export default function AboutPage() {
         <div className="max-w-[1000px] mx-auto">
           <FadeIn>
             <div className="mb-12 pb-7 border-b border-[var(--border-color)]">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-4">Our Story</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">Our Story</p>
               <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 The MEA Streaming Moment
               </h2>
@@ -56,16 +63,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Founder — premium split layout */}
-      <section className="relative py-28 px-6 bg-[#0D0D1A] overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 20% 50%, rgba(104,210,223,0.05) 0%, transparent 70%)' }}
-        />
+      {/* Founder — floating dark rounded section */}
+      <section className="relative py-28 px-6 bg-[#0A0A0A] overflow-hidden rounded-[2rem] mx-4 my-4">
         <div className="relative z-10 max-w-[1200px] mx-auto">
           <FadeIn>
-            <div className="mb-16 pb-7 border-b border-white/8">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan/70 mb-4">Founder</p>
+            <div className="mb-16 pb-7 border-b border-white/10">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#737373] mb-4">Founder</p>
               <h2 className="display-heading-lg text-white" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 Founded on a passion for helping publishers unlock their revenue potential
               </h2>
@@ -80,7 +83,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="display-serif text-white/20" style={{ fontSize: '6rem' }}>SA</span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D1A]/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
                     <h3 className="display-heading-lg text-white text-xl mb-1">Sonel Ajayi</h3>
                     <p className="text-sm text-cyan/80 font-medium">Founder &amp; CEO</p>
@@ -116,27 +119,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative py-28 px-6 bg-[var(--bg-primary)] overflow-hidden">
+      {/* CTA — floating dark rounded section */}
+      <section className="py-36 px-6 bg-[#0A0A0A] rounded-[2rem] mx-4 my-4">
         <FadeIn>
           <div className="max-w-[680px] mx-auto text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan/60 mb-8 flex items-center justify-center gap-4">
-              <span className="w-8 h-px bg-cyan/30" />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-8 flex items-center justify-center gap-4">
+              <span className="w-8 h-px bg-[#404040]" />
               Let&apos;s Talk
-              <span className="w-8 h-px bg-cyan/30" />
+              <span className="w-8 h-px bg-[#404040]" />
             </p>
-            <h2 className="display-heading-lg text-[var(--text-primary)] mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+            <h2 className="display-serif text-white mb-7" style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)' }}>
               Ready to work together?
             </h2>
-            <p className="text-[var(--text-tertiary)] text-lg mb-10 leading-relaxed font-light max-w-[480px] mx-auto">
+            <p className="text-[#8A8A8A] text-lg mb-12 leading-relaxed font-light max-w-[480px] mx-auto">
               Whether you&apos;re a CTV publisher or an adtech vendor, we&apos;d love to hear about your goals.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 h-12 px-8 bg-cyan text-navy font-semibold text-sm uppercase tracking-[0.12em] rounded-sm hover:bg-cyan-a11y transition-colors"
+              className="inline-flex items-center gap-3 h-13 px-10 bg-cyan text-[#0A0A0A] font-semibold text-sm uppercase tracking-[0.15em] rounded-sm hover:bg-cyan-a11y transition-colors"
+              style={{ height: '3.25rem' }}
             >
-              Book a Free Call <ArrowRight size={14} />
+              Book a Free Call <ArrowRight size={15} />
             </Link>
+            <p className="text-[#404040] text-xs mt-9 tracking-[0.2em] uppercase font-light">
+              No commitment &middot; Response within 1 business day
+            </p>
           </div>
         </FadeIn>
       </section>

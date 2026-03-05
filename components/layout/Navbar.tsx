@@ -36,7 +36,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-30 h-[70px] transition-transform duration-300 ease-in-out hidden lg:flex items-center ${
         visible ? 'translate-y-0' : '-translate-y-full'
-      } ${scrolled ? 'bg-[var(--bg-primary)]/90 backdrop-blur-md border-b border-[var(--border-color)]' : 'bg-transparent'}`}
+      } ${scrolled ? 'bg-white/95 backdrop-blur-md border-b border-[#E5E5E5]' : 'bg-transparent'}`}
     >
       <div className="w-full max-w-[1440px] mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -52,17 +52,17 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-[family-name:var(--font-noto)] text-[13px] uppercase tracking-[0.05em] transition-colors duration-150 relative ${
+                className={`font-[family-name:var(--font-body)] text-[13px] uppercase tracking-[0.08em] transition-colors duration-150 relative ${
                   isActive
-                    ? 'text-cyan'
+                    ? 'text-[#0A0A0A] font-semibold'
                     : scrolled
-                    ? 'text-[var(--text-primary)] hover:text-cyan'
-                    : 'text-white/90 hover:text-cyan'
+                    ? 'text-[#737373] hover:text-[#0A0A0A]'
+                    : 'text-[#737373] hover:text-[#0A0A0A]'
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan rounded-full" />
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#0A0A0A]" />
                 )}
               </Link>
             );
@@ -73,7 +73,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
         <div className="flex items-center gap-4">
           <button
             onClick={onOpenSearch}
-            className={`p-2 transition-colors hover:text-cyan ${scrolled ? 'text-[var(--text-primary)]' : 'text-white/90'}`}
+            className="p-2 text-[#737373] hover:text-[#0A0A0A] transition-colors"
             title="Press Cmd+K"
             aria-label="Search"
           >
@@ -81,7 +81,7 @@ export default function Navbar({ onOpenSearch }: NavbarProps) {
           </button>
           <Link
             href="/contact"
-            className="h-10 px-6 bg-cyan text-navy font-[family-name:var(--font-noto)] text-sm uppercase tracking-wider rounded-[var(--radius-sm)] hover:bg-cyan-a11y hover:shadow-lg transition-all duration-200 flex items-center"
+            className="h-10 px-6 bg-cyan text-[#0A0A0A] font-semibold text-sm uppercase tracking-wider rounded-[var(--radius-sm)] hover:bg-cyan-a11y transition-all duration-200 flex items-center"
           >
             Book a Call
           </Link>

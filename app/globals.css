@@ -62,13 +62,13 @@
   --radius-full: 9999px;
 
   /* Font Families */
-  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   /* Archive — geometric display font for brand/logo */
-  --font-archive: 'Archive', 'Plus Jakarta Sans', sans-serif;
-  /* Legacy aliases — point to body font so old class references still work */
-  --font-noto: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-inter: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-archive: 'Archive', 'Inter', sans-serif;
+  /* Legacy aliases */
+  --font-noto: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Accent Colors */
   --color-accent-purple: #7C3AED;
@@ -78,30 +78,18 @@
   --space-section: 7rem;
 }
 
-/* ===== CSS CUSTOM PROPERTIES FOR THEMING ===== */
+/* ===== CSS CUSTOM PROPERTIES — SINGLE LIGHT THEME ===== */
 
 :root {
-  --bg-primary: #FAFAF8;
-  --bg-secondary: #F4F3EF;
-  --bg-tertiary: #ECEAE4;
-  --border-color: #E8E6E0;
-  --text-primary: #11111F;
-  --text-secondary: #3A3A3A;
-  --text-tertiary: #7A7A7A;
-  --text-gray: #5A5A6A;
-  --border-gray: #E0DED8;
-}
-
-.dark {
-  --bg-primary: #11111F;
-  --bg-secondary: #1A1A2E;
-  --bg-tertiary: #242438;
-  --border-color: #2E2E42;
-  --text-primary: #FFFFFF;
-  --text-secondary: #DEDEDE;
-  --text-tertiary: #C4C4C6;
-  --text-gray: #9CA3AF;
-  --border-gray: #2E2E42;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7F7;
+  --bg-tertiary: #EFEFEF;
+  --border-color: #E5E5E5;
+  --text-primary: #0A0A0A;
+  --text-secondary: #404040;
+  --text-tertiary: #737373;
+  --text-gray: #8A8A8A;
+  --border-gray: #D4D4D4;
 }
 
 /* ===== BASE STYLES ===== */
@@ -127,7 +115,7 @@ body {
   display: inline;
   padding: 0;
   z-index: 0;
-  color: #68D2DF;
+  color: #0A0A0A;
 }
 
 .brush-highlight svg {
@@ -157,32 +145,21 @@ body {
 .glass-sm {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .glass-md {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.dark .glass-sm {
-  background: rgba(17, 17, 31, 0.7);
-}
-
-.dark .glass-md {
-  background: rgba(17, 17, 31, 0.75);
-}
-
-/* ===== GRADIENT MESH ===== */
+/* ===== GRADIENT MESH (enterprise — subtle) ===== */
 
 .gradient-mesh {
-  background:
-    radial-gradient(circle at 20% 50%, rgba(104, 210, 223, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(45, 27, 105, 0.2) 0%, transparent 50%),
-    linear-gradient(135deg, #11111F 0%, #1A1A2E 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7F7F7 100%);
 }
 
 /* ===== MARQUEE ANIMATION ===== */
@@ -263,16 +240,16 @@ body {
 
 /* ===== DISPLAY HEADINGS ===== */
 
-/* Serif display — Cormorant Garamond italic for premium impact moments */
+/* Display — Inter tight for premium impact moments */
 .display-serif {
   font-family: var(--font-display);
   font-weight: 700;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  font-style: normal;
+  letter-spacing: -0.03em;
   line-height: 1.05;
 }
 
-/* Bold sans display — Plus Jakarta Sans for strong headings */
+/* Bold display — Inter for strong headings */
 .display-heading {
   font-family: var(--font-body);
   font-weight: 800;
@@ -280,7 +257,7 @@ body {
   line-height: 1;
 }
 
-/* Medium sans display — for section headings */
+/* Medium display — for section headings */
 .display-heading-lg {
   font-family: var(--font-body);
   font-weight: 700;
@@ -288,13 +265,11 @@ body {
   line-height: 1.1;
 }
 
-/* ===== SECTION DARK (gradient mesh for dark sections) ===== */
+/* ===== SECTION DARK (enterprise — black) ===== */
 
 .section-dark {
-  background:
-    radial-gradient(circle at 15% 60%, rgba(124, 58, 237, 0.25) 0%, transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(104, 210, 223, 0.2) 0%, transparent 45%),
-    linear-gradient(135deg, #11111F 0%, #1A1A2E 100%);
+  background: #0A0A0A;
+  color: #FFFFFF;
 }
 
 /* ===== SERVICE IMAGE OVERLAY ===== */
@@ -320,7 +295,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(17,17,31,0.5) 0%, rgba(104,210,223,0.1) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.05) 100%);
   pointer-events: none;
 }
 
@@ -369,10 +344,10 @@ body {
 }
 
 .article-body blockquote {
-  border-left: 3px solid #68D2DF;
+  border-left: 3px solid #D4D4D4;
   padding: 0.75rem 1.5rem;
   margin: 1.5rem 0;
-  background: rgba(104, 210, 223, 0.06);
+  background: #F7F7F7;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
@@ -398,7 +373,7 @@ body {
 }
 
 .article-body pre {
-  background: #11111F;
+  background: #0A0A0A;
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   overflow-x: auto;
@@ -409,16 +384,17 @@ body {
   background: none;
   border: none;
   padding: 0;
-  color: #68D2DF;
+  color: #E5E5E5;
   font-size: 0.875rem;
 }
 
 .article-body a {
-  color: #68D2DF;
+  color: #0A0A0A;
   text-decoration: underline;
   text-underline-offset: 3px;
+  font-weight: 600;
 }
 
 .article-body a:hover {
-  color: #4BBCC9;
+  color: #404040;
 }

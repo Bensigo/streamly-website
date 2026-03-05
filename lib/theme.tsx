@@ -1,47 +1,12 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+// Theme system removed — single light theme only.
+// This file is kept so imports don't break.
 
-type Theme = 'light' | 'dark';
-
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextType>({ theme: 'light', toggleTheme: () => {} });
+import { ReactNode } from 'react';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem('streamly-theme') as Theme | null;
-    if (stored) {
-      setTheme(stored);
-    }
-    // Default is always light — we don't follow the OS dark mode preference
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('streamly-theme', theme);
-  }, [theme, mounted]);
-
-  const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
-
-  // Prevent flash of unstyled content
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <>{children}</>;
 }
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => ({ theme: 'light' as const, toggleTheme: () => {} });
