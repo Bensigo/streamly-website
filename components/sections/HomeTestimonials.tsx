@@ -14,7 +14,7 @@ export default function HomeTestimonials() {
     <section className="py-32 px-6 bg-[#0A0A0A] rounded-[2rem] mx-4 my-4">
       <div className="max-w-[800px] mx-auto text-center">
         <FadeIn>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#737373] mb-20">What Clients Say</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-20">What Clients Say</p>
 
           <div className="relative min-h-[200px]">
             <motion.div

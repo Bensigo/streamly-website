@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="flex items-end justify-between mb-16 pb-7 border-b border-[var(--border-color)]">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">What We Do</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-a11y mb-4">What We Do</p>
               <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 Three Ways We Help
               </h2>
@@ -135,7 +135,7 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent" />
                 </div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#737373] mb-4">What We Do</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan mb-4">What We Do</p>
                 <h2 className="display-heading-lg text-white mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                   CTV Monetization, End to End
                 </h2>
@@ -179,7 +179,7 @@ export default function HomePage() {
       <section className="py-32 px-6 bg-[var(--bg-primary)]">
         <div className="max-w-[1200px] mx-auto">
           <div className="mb-16 pb-7 border-b border-[var(--border-color)]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">How It Works</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-a11y mb-4">How It Works</p>
             <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
               A proven four-step process
             </h2>
@@ -192,7 +192,7 @@ export default function HomePage() {
                     {step.number}
                   </span>
                   <div className="relative z-10">
-                    <div className="w-7 h-[1.5px] bg-[#D4D4D4] mb-7" />
+                    <div className="w-7 h-[1.5px] bg-cyan mb-7" />
                     <h3 className="display-heading-lg text-[var(--text-primary)] mb-3" style={{ fontSize: '1.05rem' }}>{step.title}</h3>
                     <p className="text-sm text-[var(--text-tertiary)] leading-relaxed font-light">{step.description}</p>
                   </div>
@@ -211,7 +211,7 @@ export default function HomePage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between mb-16 pb-7 border-b border-[var(--border-color)]">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">From the Blog</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-cyan-a11y mb-4">From the Blog</p>
               <h2 className="display-heading-lg text-[var(--text-primary)]" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
                 Latest Insights
               </h2>
@@ -263,10 +263,10 @@ export default function HomePage() {
       <section className="py-36 px-6 bg-[#0A0A0A] rounded-[2rem] mx-4 my-4">
         <FadeIn>
           <div className="max-w-[680px] mx-auto text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-8 flex items-center justify-center gap-4">
-              <span className="w-8 h-px bg-[#404040]" />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan mb-8 flex items-center justify-center gap-4">
+              <span className="w-8 h-px bg-cyan/30" />
               Let&apos;s Talk
-              <span className="w-8 h-px bg-[#404040]" />
+              <span className="w-8 h-px bg-cyan/30" />
             </p>
             <h2 className="display-serif text-white mb-7" style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)' }}>
               Ready to unlock the revenue your inventory deserves?

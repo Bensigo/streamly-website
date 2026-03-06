@@ -23,7 +23,7 @@ export default function HomeHero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#737373] mb-10 flex items-center gap-4"
+              className="text-[11px] font-semibold uppercase tracking-[0.3em] text-cyan-a11y mb-10 flex items-center gap-4"
             >
               <span className="w-10 h-px bg-[#D4D4D4] inline-block" />
               CTV Ad Monetization
